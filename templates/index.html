@@ -1,0 +1,17 @@
+<form action="{{ url_for('make_maze') }}" method="POST">
+		<input type='number' name="height" min="10" max="1000" value="10" />
+		<input type='number' name="width" min="10" max="1000" value="10" />
+		<select name="type">
+			<option selected value="r">Random</option>
+			<option value="h">Start: top | End: bottom</option>
+			<option value="v">Start: left | End: right</option>
+		</select>    
+		<input type="submit" value="Build Maze">
+</form>
+{% if maze != None %}
+		{% for i in maze.layout %}
+				{% for j in i %}
+					<h1>{{j}}</h1>
+				{% endfor %}
+		{% endfor %}
+{% endif %}
