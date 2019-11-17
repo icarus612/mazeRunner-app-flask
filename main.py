@@ -9,7 +9,10 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/built', methods=['GET', 'POST'])
 def index():
-	return render_template('index.html', layout=session.get(request.args.get('maze')), solved=session.get(request.args.get('solved')))
+	layout = session.get(request.args.get('maze'))
+	solved = session.get(request.args.get('solved'))
+	print(layout, solved)
+	return render_template('index.html', layout=layout, solved=solved)
 
 @app.route('/make_maze', methods=['POST'])
 def make_maze():
@@ -28,7 +31,7 @@ def make_maze():
 	return redirect(url_for('index', maze=maze, solved=runner))
 
 
-port = int(os.environ.get('PORT', 5000)) 
-app.secret_key = os.urandom(24).hex()
 if __name__ == '__main__':
+	port = int(os.environ.get('PORT', 5000)) 
+	app.secret_key = os.urandom(24).hex()
 	app.run(debug=True, port=port)
