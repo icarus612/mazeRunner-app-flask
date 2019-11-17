@@ -1,11 +1,10 @@
-from flask import Flask, render_template, url_for, session, request, redirect, make_response
+from flask import Flask, render_template, url_for, request, redirect, make_response
 import requests
 import os
 from maze import Maze
 from runner import Runner
 
 app = Flask(__name__)
-app.secret_key = "monkeypenny"
 		
 def run_maze(maze):
 	runner = Runner(maze)
