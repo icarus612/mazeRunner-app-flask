@@ -23,11 +23,12 @@
 </ul> 
 
 {% if layout != None %}
-	<
+	<h4>Maze:</h4>
 	<pre>{{ layout }}</pre>
 {% endif %}
 {% if solved != "" and solved != None %}
+	<h4>Solved Maze:</h4>
 	<pre>{{ solved }}</pre>
 {% elif layout != None %}
-	<h2>Maze is not solvable</h2>
+	<h4>Maze is not solvable</h4>
 {% endif %}
