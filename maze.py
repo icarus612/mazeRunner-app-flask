@@ -58,6 +58,9 @@ class Maze:
 		print(f"	start point: {self.start_char}\n	end point: {self.end_char}\n	open spaces: {self.open_char}	wall type: {self.wall_char}\n	size: {maze.height} x {maze.width}")
 
 	def view_layout(self):
+		x =""
 		for i in self.layout:
-			print(i)
-	
+			x += "".join(i)
+			x += "\n"
+		print(x)
+		return x

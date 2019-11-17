@@ -6,10 +6,9 @@ from runner import Runner
 
 app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
-@app.route('/<maze>', methods=['GET', 'POST'])
-def index(maze=None):
-	print(session.get(maze))
-	return render_template('index.html', maze=session[maze])
+@app.route('/built', methods=['GET', 'POST'])
+def index():
+	return render_template('index.html', layout=session.get(request.args.get('maze')), solved=session.get(request.args.get('solved')))
 
 @app.route('/download/<file_name>')
 def download(city, country, state=None):
@@ -31,18 +30,15 @@ def make_maze():
 	width = int(request.form['width'])
 	maze_type = request.form['type']
 	maze = Maze(build=[(width, height), maze_type])
-	maze.view_layout()
 	runner = Runner(maze)
 	runner.make_node_paths()
 	complete = "Yes" if runner.completed else "No"
 	print(f"Is maze possible? {complete}")
-	session[maze] = maze
+	session[f"{maze}"] = maze.view_layout()
 	if runner.completed:	
 		runner.build_path()
-	runner.view_completed()
-	return redirect(url_for('index', maze=maze))
-
-
+	session[f"{runner}"] = runner.view_completed()
+	return redirect(url_for('index', maze=maze, solved=runner))
 
 def open_and_build(file):
 	with open(file) as m:
@@ -69,4 +65,5 @@ def open_and_build(file):
 
 port = int(os.environ.get('PORT', 5000)) 
 if __name__ == '__main__':
+	app.secret_key = os.urandom(24).hex()
 	app.run(debug=True, port=port)

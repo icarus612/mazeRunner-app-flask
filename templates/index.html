@@ -8,10 +8,11 @@
 		</select>    
 		<input type="submit" value="Build Maze">
 </form>
-{% if maze != None %}
-		{% for i in maze.layout %}
-				{% for j in i %}
-					<h1>{{j}}</h1>
-				{% endfor %}
-		{% endfor %}
+{% if layout != None %}
+	<pre>{{ layout }}</pre>
+{% endif %}
+{% if solved != "" %}
+	<pre>{{ solved }}</pre>
+{% else %}
+	<h2>Maze is not solvable</h2>
 {% endif %}

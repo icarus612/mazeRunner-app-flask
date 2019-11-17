@@ -69,8 +69,12 @@ class Runner:
 
 				
 	def view_completed(self):
+		x =""
 		for i in self.mapped_maze:
-			print(i)
+			x += "".join(i)
+			x += "\n"
+		print(x)
+		return x
 
 	def build_path(self, path="x"):
 		other_options = set(["x", "o", "+", "*", "p"])
