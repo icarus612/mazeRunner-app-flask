@@ -9,6 +9,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/built', methods=['GET', 'POST'])
 def index():
+	app.secret_key = os.urandom(24).hex()
 	layout = session.get(request.args.get('maze'))
 	solved = session.get(request.args.get('solved'))
 	print(layout, solved)
@@ -33,5 +34,4 @@ def make_maze():
 
 if __name__ == '__main__':
 	port = int(os.environ.get('PORT', 5000)) 
-	app.secret_key = os.urandom(24).hex()
 	app.run(debug=True, port=port)
