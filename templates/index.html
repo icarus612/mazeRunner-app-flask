@@ -1,4 +1,4 @@
-<h1>Build a maze</h1>
+<h1>Build a maze or upload a maze file</h1>
 <form action="{{ url_for('make_maze') }}" method="POST">
 		<input type='number' name="height" min="10" max="1000" value="10" />
 		<input type='number' name="width" min="10" max="1000" value="10" />
@@ -9,19 +9,21 @@
 		</select>    
 		<input type="submit" value="Build Maze">
 </form>
-<h4>Upload maze file to be solved</h4>
-<p>Some rules about maze/maze file types:</p>
+<h2>Upload maze file to be solved</h2>
+<form action="{{ url_for('upload_maze') }}" method="POST" enctype="multipart/form-data">
+	<input type="file" name="maze_file" accept=".txt">
+	<input type="submit">
+</form>
+<h4>Some rules about maze/maze file types:</h4>
 <ul>
 	<li>files must be .txt files</li>
 	<li>start charecter and end charecter must be different</li>
 	<li>maze must be surrounded by walls (for example hit build maze above)</li>
 	<li>walls and spaces can be anything you like (I just use # and spaces)</li>
 </ul> 
-<form action="{{ url_for('upload_maze') }}" method="POST" enctype="multipart/form-data">
-	<input type="file" name="maze_file" accept=".txt">
-	<input type="submit">
-</form>
+
 {% if layout != None %}
+	<
 	<pre>{{ layout }}</pre>
 {% endif %}
 {% if solved != "" and solved != None %}
