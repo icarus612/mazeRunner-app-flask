@@ -29,7 +29,6 @@ def index():
 def upload_maze():
 	maze_file = request.files['maze_file']
 	txt = maze_file.stream.read().decode("utf-8")
-	print(txt)
 	if txt == '':
 		return redirect(url_for('index', maze=None, solved=None))
 	else:
