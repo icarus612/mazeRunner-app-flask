@@ -54,7 +54,6 @@ def upload_maze():
 		runner = run_maze(maze)
 		return make_cookie(maze, runner)
 
-
 @app.route('/make_maze', methods=['POST'])
 def make_maze():
 	height = int(request.form['height'])
