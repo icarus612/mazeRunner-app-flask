@@ -30,25 +30,26 @@ def upload_maze():
 	maze_file = request.files['maze_file']
 	if maze_file == '':
 		return redirect(url_for('index', maze=None, solved=None))
-	txt = maze_file.stream.read().decode("utf-8")
-	m1 = [list(i) for i in txt.split("\n")]
-	flat = [y for x in m1 for y in x]
-	s = set(txt)
-	wall = txt[0][0]
-	s.remove("\n")
-	s.remove(wall)
-	for i in s:
-		if flat.count(i) == 1:
-			pass
-		else: 
-			space = i
-	s.remove(space)
-	flat[:] = [x for x in flat if x != wall and x != space]
-	start = flat[0]
-	end = flat[1]
-	maze = Maze(m1, start, end, wall, space)
-	runner = run_maze(maze)
-	return redirect(url_for('index', maze=maze, solved=runner))
+	else:
+		txt = maze_file.stream.read().decode("utf-8")
+		m1 = [list(i) for i in txt.split("\n")]
+		flat = [y for x in m1 for y in x]
+		s = set(txt)
+		wall = txt[0][0]
+		s.remove("\n")
+		s.remove(wall)
+		for i in s:
+			if flat.count(i) == 1:
+				pass
+			else: 
+				space = i
+		s.remove(space)
+		flat[:] = [x for x in flat if x != wall and x != space]
+		start = flat[0]
+		end = flat[1]
+		maze = Maze(m1, start, end, wall, space)
+		runner = run_maze(maze)
+		return redirect(url_for('index', maze=maze, solved=runner))
 
 @app.route('/make_maze', methods=['POST'])
 def make_maze():
