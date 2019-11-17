@@ -8,6 +8,11 @@
 		</select>    
 		<input type="submit" value="Build Maze">
 </form>
+<h4> or </h4> 
+<form action="{{ url_for('upload_maze') }}" method="POST" enctype="multipart/form-data">
+	<input type="file" name="maze_file" accept=".txt">
+	<input type="submit">
+</form>
 {% if layout != None %}
 	<pre>{{ layout }}</pre>
 {% endif %}
