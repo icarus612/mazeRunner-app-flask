@@ -28,11 +28,11 @@ def index():
 @app.route('/upload_maze', methods=['POST'])
 def upload_maze():
 	maze_file = request.files['maze_file']
-	print(maze_file)
-	if maze_file == '':
+	txt = maze_file.stream.read().decode("utf-8")
+	print(txt)
+	if txt == '':
 		return redirect(url_for('index', maze=None, solved=None))
 	else:
-		txt = maze_file.stream.read().decode("utf-8")
 		m1 = [list(i) for i in txt.split("\n")]
 		flat = [y for x in m1 for y in x]
 		s = set(txt)
