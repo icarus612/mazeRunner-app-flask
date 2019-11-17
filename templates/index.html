@@ -11,7 +11,7 @@
 {% if layout != None %}
 	<pre>{{ layout }}</pre>
 {% endif %}
-{% if solved != None %}
+{% if solved != "" and solved != None %}
 	<pre>{{ solved }}</pre>
 {% elif layout != None %}
 	<h2>Maze is not solvable</h2>
