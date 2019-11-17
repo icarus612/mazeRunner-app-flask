@@ -5,6 +5,7 @@ from maze import Maze
 from runner import Runner
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24).hex()
 
 @app.route('/')
 @app.route('/built')
@@ -32,6 +33,5 @@ def make_maze():
 
 
 if __name__ == '__main__':
-	app.secret_key = os.urandom(24).hex()
 	port = int(os.environ.get('PORT', 5000)) 
 	app.run(debug=True, port=port)
