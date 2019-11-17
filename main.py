@@ -5,7 +5,7 @@ from maze import Maze
 from runner import Runner
 
 app = Flask(__name__)
-app.secret_key = "ai2927"
+app.secret_key = "ai3927"
 		
 def run_maze(maze):
 	runner = Runner(maze)
