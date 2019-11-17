@@ -64,6 +64,5 @@ def open_and_build(file):
 
 
 port = int(os.environ.get('PORT', 5000)) 
-if __name__ == '__main__':
-	app.secret_key = os.urandom(24).hex()
-	app.run(debug=True, port=port)
+app.secret_key = os.urandom(24).hex()
+app.run(debug=True, port=port)
