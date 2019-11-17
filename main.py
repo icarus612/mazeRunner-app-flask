@@ -28,6 +28,7 @@ def index():
 @app.route('/upload_maze', methods=['POST'])
 def upload_maze():
 	maze_file = request.files['maze_file']
+	print(maze_file)
 	if maze_file == '':
 		return redirect(url_for('index', maze=None, solved=None))
 	else:
