@@ -9,6 +9,7 @@
 		</select>    
 		<input type="submit" value="Build Maze">
 </form>
+<hr />
 <form action="{{ url_for('upload_maze') }}" method="POST" enctype="multipart/form-data">
 	<input type="file" name="maze_file" accept=".txt" />
 	<input type="submit" value="upload" />
