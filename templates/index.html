@@ -1,7 +1,7 @@
 <h1>Build a Maze or Upload a Maze File</h1>
 <form action="{{ url_for('make_maze') }}" method="POST">
-		<input type='number' name="height" min="10" max="70" value="10" />
-		<input type='number' name="width" min="10" max="70" value="10" />
+		<input type='number' name="height" min="10" max="60" value="10" />
+		<input type='number' name="width" min="10" max="60" value="10" />
 		<select name="type">
 			<option selected value="r">Start: random | End: random</option>
 			<option value="h">Start: top | End: bottom</option>

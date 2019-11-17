@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, session, request, redirect
+from flask import Flask, render_template, url_for, session, request, redirect, make_response
 import requests
 import os
 from maze import Maze
@@ -10,19 +10,23 @@ app.secret_key = "monkeypenny"
 def run_maze(maze):
 	runner = Runner(maze)
 	runner.make_node_paths()
-	session[f"{maze}"] = maze.view_layout()
 	complete = "Yes" if runner.completed else "No"
 	print(f"Is maze possible? {complete}")
 	if runner.completed:	
 		runner.build_path()
-	session[f"{runner}"] = runner.view_completed()
 	return runner
+
+def make_cookie(maze, runner):
+	res = make_response(redirect(url_for('index', maze=maze, solved=runner)))
+	res.set_cookie(f"{maze}", maze.view_layout(), max_age=60*60*1)
+	res.set_cookie(f"{runner}", runner.view_completed(), max_age=60*60*1)
+	return res
 
 @app.route('/')
 @app.route('/built')
 def index():
-	layout = session.get(request.args.get('maze'))
-	solved = session.get(request.args.get('solved'))
+	layout = request.cookies.get(request.args.get('maze'))
+	solved = request.cookies.get(request.args.get('solved'))
 	return render_template('index.html', layout=layout, solved=solved)
 
 @app.route('/upload_maze', methods=['POST'])
@@ -49,7 +53,8 @@ def upload_maze():
 		end = flat[1]
 		maze = Maze(m1, start, end, wall, space)
 		runner = run_maze(maze)
-		return redirect(url_for('index', maze=maze, solved=runner))
+		return make_cookie(maze, runner)
+
 
 @app.route('/make_maze', methods=['POST'])
 def make_maze():
@@ -58,7 +63,8 @@ def make_maze():
 	maze_type = request.form['type']
 	maze = Maze(build=[(width, height), maze_type])
 	runner = run_maze(maze)
-	return redirect(url_for('index', maze=maze, solved=runner))
+	make_cookie(maze, runner)
+	return make_cookie(maze, runner)
 
 
 if __name__ == '__main__':
