@@ -5,7 +5,7 @@ from maze import Maze
 from runner import Runner
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24).hex()
+app.secret_key = "ai2927"
 
 @app.route('/')
 @app.route('/built')
