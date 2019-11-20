@@ -1,9 +1,10 @@
 <h1>Build a Maze or Upload a Maze File</h1>
 <form action="{{ url_for('make_maze') }}" method="POST">
-		<span>height: </span>
+		<span>Height: </span>
 		<input type='number' name="height" min="10" max="60" value="10" />
-		<span>width: </span>
+		<span>Width: </span>
 		<input type='number' name="width" min="10" max="60" value="10" />
+		<span>Start and End Placement: </span>
 		<select name="type">
 			<option selected value="r">Start: random | End: random</option>
 			<option value="h">Start: top | End: bottom</option>
@@ -13,7 +14,7 @@
 </form>
 <br />
 <form action="{{ url_for('upload_maze') }}" method="POST" enctype="multipart/form-data">
-	<input type="file" name="maze_file" accept=".txt" />
+	<span>Upload Maze File: </span><input type="file" name="maze_file" accept=".txt" />
 	<input type="submit" value="upload" />
 </form>
 <h4>Some rules about maze/maze file types:</h4>
