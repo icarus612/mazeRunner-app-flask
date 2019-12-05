@@ -6,3 +6,5 @@ request==2019.4.13
 requests==2.22.0
 requests-html==0.10.0
 Werkzeug==0.16.0
+flask-bootstrap4
+flask-fontawesome==0.1.2
