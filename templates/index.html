@@ -1,37 +1,74 @@
-<h1>Build a Maze or Upload a Maze File</h1>
-<form action="{{ url_for('make_maze') }}" method="POST">
-		<span>Height: </span>
-		<input type='number' name="height" min="10" max="60" value="10" />
-		<span>Width: </span>
-		<input type='number' name="width" min="10" max="60" value="10" />
-		<span>Start and End Placement: </span>
-		<select name="type">
-			<option selected value="r">Start: random | End: random</option>
-			<option value="h">Start: top | End: bottom</option>
-			<option value="v">Start: left | End: right</option>
-		</select>    
-		<input type="submit" value="Build Maze">
-</form>
-<br />
-<form action="{{ url_for('upload_maze') }}" method="POST" enctype="multipart/form-data">
-	<span>Upload Maze File: </span><input type="file" name="maze_file" accept=".txt" />
-	<input type="submit" value="upload" />
-</form>
-<h4>Some rules about maze/maze file types:</h4>
-<ul>
-	<li>files must be .txt files</li>
-	<li>start charecter and end charecter must be different</li>
-	<li>maze must be surrounded by walls (for example hit build maze above)</li>
-	<li>walls and spaces can be anything you like (I just use # and spaces)</li>
-</ul> 
-
-{% if layout != None %}
-	<h4>Maze:</h4>
-	<pre>{{ layout }}</pre>
-{% endif %}
-{% if solved != "" and solved != None %}
-	<h4>Solved Maze:</h4>
-	<pre>{{ solved }}</pre>
-{% elif layout != None %}
-	<h3>Maze is not Solvable</h3>
-{% endif %}
+{% extends "bootstrap/base.html" %}
+{% block styles %}
+    {{ super() }}
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='styles.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-5">
+		<h1>Build a Maze or Upload a Maze File</h1>
+		<form action="{{ url_for('make_maze') }}" class="m-3" method="POST">
+			<span>Height: </span>
+			<input type='number' name="height" min="10" max="60" value="10" />
+			<span>Width: </span>
+			<input type='number' name="width" min="10" max="60" value="10" />
+			<span>Start and End Placement: </span>
+			<select name="type">
+				<option selected value="r">Start: random | End: random</option>
+				<option value="h">Start: top | End: bottom</option>
+				<option value="v">Start: left | End: right</option>
+			</select>    
+			<input type="submit" class="btn btn-primary" value="Build Maze">
+		</form>
+		<form action="{{ url_for('upload_maze') }}" class="m-3" method="POST" enctype="multipart/form-data">
+			<span>Upload Maze File: </span>
+			<input type="file" class="input-file" name="maze_file" accept=".txt" />
+			<lable for="maze_file">Choose a file...</lable>
+			<input type="submit"  class="btn btn-primary" value="upload" />
+		</form>
+	</div>
+	<div class="container d-flex flex-column flex-wrap justify-content-center align-items-center mt-5 px-3">
+		<h4>Some rules about maze/maze file types:</h4>
+		<ul>
+			<li>files must be .txt files</li>
+			<li>start charecter and end charecter must be different</li>
+			<li>maze must be surrounded by walls (for example hit build maze above)</li>
+			<li>walls and spaces can be anything you like (I just use # and spaces)</li>
+		</ul> 
+	</div>
+	<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-5 px-3">
+		<div class="col-12 col-md-6">
+			{% if layout != None %}
+				<h4>Maze:</h4>
+				<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-5" id="maze">
+					{% for row in layout.split("\n") %}
+						<div class="col-12">
+							{% for x in row %}
+								<pre>{{ x }}</pre>
+							{% endfor %} 
+						</div>
+					{% endfor %}
+				</div>
+			{% endif %}	
+		</div>
+		<div class="col-12 col-md-6">
+			{% if solved != "" and solved != None %}
+				<h4>Solved Maze:</h4>
+				<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-5" id="solved">
+					{% for row in solved.split("\n") %}
+						<div class="col-12">
+							{% for x in row %}
+								{% if x == path %}
+									<pre class="path">{{ x }}</pre>
+								{% else %}
+									<pre>{{ x }}</pre>
+								{% endif %}
+							{% endfor %} 
+						</div>
+					{% endfor %}
+				</div>
+			{% elif layout != None %}
+				<h3>Maze is not Solvable</h3>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

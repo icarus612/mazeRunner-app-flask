@@ -1,4 +1,4 @@
-from node import Node
+from modules.node import Node
 
 class Runner:
 	def __init__(self, maze):
@@ -11,6 +11,7 @@ class Runner:
 		self.completed = False
 		self.mapped_maze = []
 		self.possible_paths = []
+		self.path = None
 		self.get_open_nodes()
 		self.find_end_points()
 		
@@ -69,7 +70,7 @@ class Runner:
 
 				
 	def view_completed(self):
-		x =""
+		x = ""
 		for i in self.mapped_maze:
 			x += "".join(i)
 			x += "\n"
@@ -88,9 +89,9 @@ class Runner:
 					path = i
 					print(f"New path character: {i}")
 					break
+		self.path = path
 		self.mapped_maze = [list(i) for i in maze.layout]
 		for i in range(len(self.mapped_maze)):
 			for j in range(len(self.mapped_maze[i])):
 				if (i, j) in self.end.path and (i, j) != self.start.value:
 					self.mapped_maze[i][j] = path
-	

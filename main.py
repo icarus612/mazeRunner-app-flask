@@ -1,10 +1,12 @@
 from flask import Flask, render_template, url_for, request, redirect, make_response
 import requests
 import os
-from maze import Maze
-from runner import Runner
+from modules.maze import Maze
+from modules.runner import Runner
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
+Bootstrap(app)
 		
 def run_maze(maze):
 	runner = Runner(maze)
@@ -16,17 +18,17 @@ def run_maze(maze):
 	return runner
 
 def make_cookie(maze, runner):
-	res = make_response(redirect(url_for('index', maze=maze, solved=runner)))
+	res = make_response(redirect(url_for('index', maze=maze, solved=runner, path=runner.path)))
 	res.set_cookie(f"{maze}", maze.view_layout(), max_age=60*60*1)
 	res.set_cookie(f"{runner}", runner.view_completed(), max_age=60*60*1)
 	return res
 
 @app.route('/')
-@app.route('/built')
 def index():
 	layout = request.cookies.get(request.args.get('maze'))
 	solved = request.cookies.get(request.args.get('solved'))
-	return render_template('index.html', layout=layout, solved=solved)
+	path = request.args.get('path')
+	return render_template('index.html', layout=layout, solved=solved, path=path)
 
 @app.route('/upload_maze', methods=['POST'])
 def upload_maze():
