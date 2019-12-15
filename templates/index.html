@@ -38,10 +38,10 @@
 		</ul> 
 	</div>
 	<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-5 px-3">
-		<div class="col-12 col-md-6">
+		<div class="col-12 col-md-6 my-3">
 			{% if layout != None %}
 				<h4>Maze:</h4>
-				<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-5" id="maze">
+				<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-2" id="maze">
 					{% for row in layout.split("\n") %}
 						<div class="col-12">
 							{% for x in row %}
@@ -52,10 +52,10 @@
 				</div>
 			{% endif %}	
 		</div>
-		<div class="col-12 col-md-6">
+		<div class="col-12 col-md-6 my-3">
 			{% if solved != "" and solved != None %}
 				<h4>Solved Maze:</h4>
-				<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-5" id="solved">
+				<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-2" id="solved">
 					{% for row in solved.split("\n") %}
 						<div class="col-12">
 							{% for x in row %}
