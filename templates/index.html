@@ -4,7 +4,7 @@
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='styles.css') }}">
 {% endblock %}
 {% block content %}
-    <div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-5">
+    <div class="container d-flex flex-column flex-wrap justify-content-center align-items-center text-center mt-5">
 		<h1>Build a Maze or Upload a Maze File</h1>
 		<form action="{{ url_for('make_maze') }}" class="m-3" method="POST">
 			<span>Height: </span>
@@ -21,8 +21,8 @@
 		</form>
 		<form action="{{ url_for('upload_maze') }}" class="m-3" method="POST" enctype="multipart/form-data">
 			<span>Upload Maze File: </span>
-			<input type="file" class="input-file" name="maze_file" accept=".txt" />
-			<lable for="maze_file">Choose a file...</lable>
+			<input type="file" class="input-file" id="maze-file" name="maze_file" accept=".txt" />
+			<label for="maze-file">Choose a file...</label>
 			<input type="submit"  class="btn btn-primary" value="upload" />
 		</form>
 	</div>

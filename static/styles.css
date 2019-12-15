@@ -7,20 +7,25 @@
     z-index: -1;
 }
 
-.input-file+label {
+.input-file + label {
     font-size: 1.25em;
     font-weight: 700;
     color: white;
-    background-color: black;
+    background-color: #451A8D;
+    padding: 5px 8px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 4px -1px rgba(50,50,50,.5);
     display: inline-block;
     cursor: pointer; /* "hand" cursor */
 }
 
-.input-file:focus+label,
-.input-file+label:hover {
-    background-color: red;
+.input-file:focus + label,
+.input-file + label:hover {
+    background-color: #AB49F1;
     outline: 1px dotted #000;
-	outline: -webkit-focus-ring-color auto 5px;
+    outline: -webkit-focus-ring-color auto 5px;
+    transition: .3s;
+    box-shadow: 1px 1px 4px -1px rgba(0,0,0,.4);
 }
 
 #maze pre, #solved pre {
