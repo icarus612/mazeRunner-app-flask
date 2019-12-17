@@ -100,3 +100,7 @@ select:focus {
 select option {
 	font-weight:normal;
 }
+
+.disclamer {
+    color: #5a5a5a;
+}
