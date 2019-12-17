@@ -4,10 +4,12 @@ import os
 from modules.maze import Maze
 from modules.runner import Runner
 from flask_bootstrap import Bootstrap
+from flask_fontawesome import FontAwesome
 
 app = Flask(__name__)
 Bootstrap(app)
-		
+fa = FontAwesome(app)
+
 def run_maze(maze):
 	runner = Runner(maze)
 	runner.make_node_paths()
