@@ -7,9 +7,9 @@
 {% block content %}
     <div class="container d-flex flex-column flex-wrap justify-content-center align-items-center text-center mt-5">
 		<h1>Build a Maze or Upload a Maze File</h1>
-		<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center my-4 px-3">
-			<div class="col-12 col-md-6 my-3">
-				{% if layout != None %}
+		{% if layout != None %}
+			<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center my-4 px-3">
+				<div class="col-12 col-md-6 my-3">
 					<h4>Maze:</h4>
 					<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-3" id="maze">
 						{% for row in layout.split("\n") %}
@@ -20,28 +20,29 @@
 							</div>
 						{% endfor %}
 					</div>
-				{% endif %}	
+				</div>
+				<div class="col-12 col-md-6 my-3">
+					{% if solved != "" and solved != None %}
+						<h4>Solved Maze:</h4>
+						<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-3" id="solved">
+							{% for row in solved.split("\n") %}
+								<div class="col-12">
+									{% for x in row %}
+										{% if x == path %}
+											<pre class="path">{{ x }}</pre>
+										{% else %}
+											<pre>{{ x }}</pre>
+										{% endif %}
+									{% endfor %} 
+								</div>
+							{% endfor %}
+						</div>
+					{% else %}
+						<h3>Maze is not Solvable</h3>
+					{% endif %}
+				</div>
 			</div>
-			<div class="col-12 col-md-6 my-3">
-				{% if solved != "" and solved != None %}
-					<h4>Solved Maze:</h4>
-					<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-3" id="solved">
-						{% for row in solved.split("\n") %}
-							<div class="col-12">
-								{% for x in row %}
-									{% if x == path %}
-										<pre class="path">{{ x }}</pre>
-									{% else %}
-										<pre>{{ x }}</pre>
-									{% endif %}
-								{% endfor %} 
-							</div>
-						{% endfor %}
-					</div>
-				{% elif layout != None %}
-					<h3>Maze is not Solvable</h3>
-				{% endif %}
-			</div>
+		{% endif %}	
 		</div>
 		<form action="{{ url_for('make_maze') }}" class="m-3 d-flex flex-row flex-wrap justify-content-center align-items-center" method="POST">
 			<span class="p-2">Height: </span>
