@@ -7,10 +7,9 @@ from flask_bootstrap import Bootstrap
 from flask_fontawesome import FontAwesome
 from flask_sslify import SSLify
 
+app = Flask(__name__)
 if 'DYNO' in os.environ: # only trigger SSLify if the app is running on Heroku
     sslify = SSLify(app)
-	
-app = Flask(__name__)
 Bootstrap(app)
 fa = FontAwesome(app)
 
