@@ -36,10 +36,9 @@
     box-shadow: 1px 1px 4px -1px rgba(0,0,0,.4);
 }
 
-#maze pre, #solved pre {
+.maze-container pre {
     display: inline;
     color: #451A8D;
-    overflow-x: scroll;
 }
 
 #solved pre.path {
@@ -103,4 +102,14 @@ select option {
 
 .disclamer {
     color: #5a5a5a;
+}
+
+
+.maze-container {
+    overflow-x: scroll;
+    width: 100%;
+}
+.maze-line {
+    overflow-x: visible;
+    width: max-content;
 }

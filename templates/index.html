@@ -11,9 +11,9 @@
 			<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center my-4 px-3">
 				<div class="col-12 col-md-6 my-3">
 					<h4>Maze:</h4>
-					<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-3" id="maze">
+					<div class="container maze-container" id="maze">
 						{% for row in layout.split("\n") %}
-							<div class="col-12">
+							<div class="maze-line">
 								{% for x in row %}
 									<pre>{{ x }}</pre>
 								{% endfor %} 
@@ -24,9 +24,9 @@
 				<div class="col-12 col-md-6 my-3">
 					{% if solved != "" and solved != None %}
 						<h4>Solved Maze:</h4>
-						<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-3" id="solved">
+						<div class="container maze-container" id="solved">
 							{% for row in solved.split("\n") %}
-								<div class="col-12">
+								<div class="maze-line">
 									{% for x in row %}
 										{% if x == path %}
 											<pre class="path">{{ x }}</pre>
@@ -64,16 +64,18 @@
 		</form>
 		<p class="col-12 col-md-8 disclamer text-left"><b>Disclamer</b>: maze is built and solved on the server and then saved as a cookie. Because this is not built and saved to a database maze height and width are set for a max of 60 to avoid cookies being to large, but that isn't to say the maze solver or builder couldnt handle larger files. To see the full code of the maze runner checkout the repo: <a href="https://github.com/icarus612/mazeRunner-PY">click here</a> or to see the code for this web app checkout <a href="https://github.com/icarus612/mazeRunner-flask-PY">click here</a>.</p>
 	</div>
-	<div class="container d-flex flex-column flex-wrap justify-content-center align-items-center mt-3 px-3">
-		<h4 class="col-12 col-md-8 col-lg-7">
-			Some rules about maze/maze file types:
-		</h4>
-		<ul>
-			<li>files must be .txt files</li>
-			<li>start charecter and end charecter must be different</li>
-			<li>maze must be surrounded by walls (for example hit build maze above)</li>
-			<li>walls and spaces can be anything you like (I just use # and spaces)</li>
-		</ul> 
+	<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center mt-3 px-3">
+		<div class="col-12 col-md-8 col-lg-7">
+			<h4>
+				Some rules about maze/maze file types:
+			</h4>
+			<ul>
+				<li>files must be .txt files</li>
+				<li>start charecter and end charecter must be different</li>
+				<li>maze must be surrounded by walls (for example hit build maze above)</li>
+				<li>walls and spaces can be anything you like (I just use # and spaces)</li>
+			</ul> 
+		</div>
 	</div>
 	
 {% endblock %}
