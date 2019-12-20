@@ -5,7 +5,7 @@
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='styles.css') }}">
 {% endblock %}
 {% block content %}
-    <div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center mt-5">
+    <div class="container d-flex flex-column flex-wrap justify-content-center align-items-center text-center mt-5">
 		<h1>Build a Maze or Upload a Maze File</h1>
 		{% if layout != None %}
 			<div class="container d-flex flex-row flex-wrap justify-content-center align-items-center text-center my-4 px-3">
@@ -43,17 +43,21 @@
 				</div>
 			</div>
 		{% endif %}	
-		<form action="{{ url_for('make_maze') }}" class="m-3 d-flex flex-row flex-wrap justify-content-center align-items-center" method="POST">
-			<span class="p-2">Height: </span>
-			<input class="num-input" type='number' name="height" min="10" max="60" value="10" />
-			<span class="p-2">Width: </span>
-			<input class="num-input" type='number' name="width" min="10" max="60" value="10" />
-			<span class="p-2">Start and End Placement: </span>
-			<select name="type">
-				<option selected value="h">Start: top | End: bottom</option>
-				<option value="v">Start: left | End: right</option>
-				<option value="r">Start: random | End: random</option>
-			</select>    
+		<form action="{{ url_for('make_maze') }}" class="m-3 d-flex flex-column flex-wrap justify-content-center align-items-center" method="POST">
+			<div class="m-2">
+				<span class="p-2">Height: </span>
+				<input class="num-input" type='number' name="height" min="10" max="60" value="10" />
+				<span class="p-2">Width: </span>
+				<input class="num-input" type='number' name="width" min="10" max="60" value="10" />
+			</div>
+			<div class="m-2">
+				<span class="m-2">Start and End Placement: </span>
+				<select class="m-2" name="type">
+					<option selected value="h">Start: top | End: bottom</option>
+					<option value="v">Start: left | End: right</option>
+					<option value="r">Start: random | End: random</option>
+				</select>    
+			</div>
 			<input type="submit" class="btn button m-2" value="Build Maze">
 		</form>
 		<form action="{{ url_for('upload_maze') }}" class="m-3 d-flex flex-row flex-wrap justify-content-center align-items-center" method="POST" enctype="multipart/form-data">

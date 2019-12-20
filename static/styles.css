@@ -105,12 +105,13 @@ select option {
     color: #5a5a5a;
 }
 
-
 .maze-container {
     overflow-x: scroll;
     width: 100%;
 }
+
 .maze-line {
     overflow-x: visible;
     width: max-content;
+    margin: auto;
 }
