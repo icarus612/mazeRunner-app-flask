@@ -43,7 +43,7 @@
 				</div>
 			</div>
 		{% endif %}	
-		<form action="{{ url_for('make_maze') }}" class="m-3 d-flex flex-column flex-wrap justify-content-center align-items-center" method="POST">
+		<form action="{{ url_for('make_maze') }}" class="m-3 d-flex flex-column flex-wrap justify-content-start align-items-center" method="POST">
 			<div class="m-2">
 				<span class="p-2">Height: </span>
 				<input class="num-input" type='number' name="height" min="10" max="60" value="10" />
