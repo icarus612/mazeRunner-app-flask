@@ -105,6 +105,7 @@ select option {
 
 .disclamer {
     color: #5a5a5a;
+    height: fit-content;
 }
 
 .maze-container {
